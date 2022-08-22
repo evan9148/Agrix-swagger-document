@@ -1,0 +1,107 @@
+const db = require("../models");
+const Farmer = db.farmer;
+
+// Get Farmer Details
+exports.farmer =(req,res) =>{
+    const  farmerId= req.query.farmerId;
+      var condition = farmerId ? { farmerId: { $regex: new RegExp(farmerId), $options: "i" } } : {};
+      Farmer.find(condition)
+        .then(data => {
+          res.send(data);
+        })
+        .catch(err => {
+          res.status(500).send({
+            message:
+              err.message || "Some error occurred while retrieving FarmerId."
+          });
+        });
+}
+
+// Add for farmer...!
+exports.addFarmer =  (req, res) => {
+    const farmer = new Farmer({
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        farmerId: req.body.farmerId,
+        ownerType: req.body.ownerType,
+        address: req.body.address,
+        farmingSeason: req.body.farmingSeason,
+        cropType: req.body.cropType,
+        cropSubType: req.body.cropSubType,
+        // plotArea: req.body.plotArea,
+    });
+
+    farmer
+        .save(farmer)
+        .then(data => {
+            res.send(data);
+        })
+        .catch(error => {
+            res.status(500).send({
+                message:
+                    error.message || "some error occurred while creating the farmer"
+            });
+        });
+
+}
+
+exports.farmerById = (req, res) => {
+  const id = req.params.id;
+  Farmer.findById(id)
+    .then(data => {
+      if (!data)
+        res.status(404).send({ message: "Not found Farmer with id " + id });
+      else res.send(data);
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .send({ message: "Error retrieving Farmer with id=" + id });
+    });
+};
+
+
+
+
+exports.updateFarmerById = (req, res) =>{
+  if (!req.body) {
+    return res.status(400).send({
+      message: "Data to update can not be empty!"
+    });
+  }
+  const id = req.params.id;
+  Farmer.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
+    .then(data => {
+      if (!data) {
+        res.status(404).send({
+          message: `Cannot update Farmer with id=${id}. Maybe Farmer was not found!`
+        });
+      } else res.send({ message: "Farmer was updated successfully." });
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error updating Farmer with id=" + id
+      });
+    });
+}
+
+exports.deleteFarmerById = (req, res) => {
+  const id = req.params.id;
+  Farmer.findByIdAndRemove(id)
+    .then(data => {
+      if (!data) {
+        res.status(404).send({
+          message: `Cannot delete Farmer with id=${id}. Maybe Farmer was not found!`
+        });
+      } else {
+        res.send({
+          message: "Farmer was deleted successfully!"
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Could not delete Farmer with id=" + id
+      });
+    });
+};

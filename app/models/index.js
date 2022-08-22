@@ -1,0 +1,12 @@
+const dbConfig = require("../config/db.config.js");
+const mongoose = require("mongoose");
+mongoose.Promise = global.Promise;
+const db = {};
+db.mongoose = mongoose;
+db.url = dbConfig.url;
+db.farmMachine = require("./farm-machine")(mongoose);
+db.cluster = require("./cluster")(mongoose);
+db.farmer = require("./farmer")(mongoose);
+db.plot = require("./plot-details")(mongoose);
+db.state = require("./state")(mongoose);
+module.exports = db;
