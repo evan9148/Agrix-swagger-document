@@ -34,6 +34,7 @@ require("./app/routes/farm-machine-route")(app);
 require("./app/routes/cluster-route")(app);
 require("./app/routes/farmer-route")(app);
 require("./app/routes/plot-route")(app);
+require("./app/routes/driver-route")(app);
 require("./app/routes/state-route")(app);
 
 

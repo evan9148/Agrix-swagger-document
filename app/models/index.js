@@ -8,5 +8,6 @@ db.farmMachine = require("./farm-machine")(mongoose);
 db.cluster = require("./cluster")(mongoose);
 db.farmer = require("./farmer")(mongoose);
 db.plot = require("./plot-details")(mongoose);
+db.driver = require("./driver")(mongoose);
 db.state = require("./state")(mongoose);
 module.exports = db;
