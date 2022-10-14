@@ -36,6 +36,16 @@ require("./app/routes/farmer-route")(app);
 require("./app/routes/plot-route")(app);
 require("./app/routes/driver-route")(app);
 require("./app/routes/state-route")(app);
+require("./app/routes/district-route")(app);
+require("./app/routes/common-route")(app);
+require("./app/routes/owner-type-route")(app);
+require("./app/routes/farm-season-route")(app);
+require("./app/routes/crop-type-route")(app);
+require("./app/routes/crop-sub-type-route")(app);
+require("./app/routes/variety-route")(app);
+require("./app/routes/user-route")(app);
+require("./app/routes/clusterId.route")(app);
+
 
 
   // set port, listen for requests

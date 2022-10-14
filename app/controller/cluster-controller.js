@@ -42,7 +42,7 @@ exports.addCluster = (req, res) => {
         .save(cluster)
         .then(data => {
             res.send(data);
-            console.log(data);
+            // console.log(data);
         })
         .catch(error => {
             res.status(500).send({
