@@ -6,6 +6,8 @@ module.exports = app =>{
 
     router.post('/',[authJwt.verifyToken,authJwt.isAdmin],croptype.addCropType);
     router.get('/',[authJwt.verifyToken,authJwt.isAdmin],croptype.getCropType);
+    router.put("/:id", croptype.updateCropTypebyId);
+    router.delete("/:id",croptype.deleteCropTypebyId);
 
     app.use('/api/croptype',router);
 }

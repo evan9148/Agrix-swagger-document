@@ -35,3 +35,50 @@ exports.addCropType = (req,res) =>{
             });
         });
 }
+
+
+// update croptype...
+exports.updateCropTypebyId = (req, res) =>{
+    if (!req.body) {
+        return res.status(400).send({
+            message: "Data to update can not be empty!"
+        });
+    }
+    const id = req.params.id;
+    CropType.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
+        .then(data => {
+        if (!data) {
+            res.status(404).send({
+                message: `Cannot update CropType with id=${id}. Maybe CropType was not found!`
+            });
+        } else res.send({ message: "CropType was updated successfully." });
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: "Error updating CropType with id=" + id
+            });
+        });
+}
+
+
+// delete CropType...
+exports.deleteCropTypebyId = (req, res) => {
+const id = req.params.id;
+    CropType.findByIdAndRemove(id)
+        .then(data => {
+            if (!data) {
+                res.status(404).send({
+                    message: `Cannot delete CropType with id=${id}. Maybe CropType was not found!`
+                });
+            } else {
+                res.send({
+                    message: "CropType was deleted successfully!"
+                });
+            }
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: "Could not delete Farmer with id=" + err
+            });
+        });
+};

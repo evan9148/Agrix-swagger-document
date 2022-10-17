@@ -4,8 +4,8 @@ module.exports = mongoose => {
         mongoose.Schema(
             {
                 // {_id:"", district : "",shortName:"", stateid : _id from state}
-                district: String,
-                districtId: String,
+                name: String,
+                shortName: String,
                 stateId: [{ type: mongoose.Schema.Types.ObjectId, ref: "state"}],
             },
             { timestamps: true }

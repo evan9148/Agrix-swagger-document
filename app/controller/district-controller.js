@@ -5,8 +5,8 @@ const District = db.district;
 // post api for district...
 exports.addDistrict = (req,res) => {
   const district = new District({
-      district: req.body.district,
-      districtId: req.body.districtId,
+      name: req.body.name,
+      shortName: req.body.shortName,
       stateId: req.body.stateId,
   })
 
