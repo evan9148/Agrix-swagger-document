@@ -3,8 +3,8 @@ module.exports = mongoose =>{
         "State",
         mongoose.Schema(
             {
-                state:String,
-                id:String
+                name:String,
+                shortName:String
             },
             {timestamps:true}
         )
