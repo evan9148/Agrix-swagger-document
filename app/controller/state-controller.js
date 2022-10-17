@@ -4,23 +4,22 @@ const State=db.state;
 
 // Add state
 exports.addState = (req,res) =>{
-    const id=req.body._id;
     const state=new State({
-        state:req.body.state,
-        id:req.body.id
+        name:req.body.name,
+        shortName:req.body.shortName
     });
 
     state
-    .save(state)
-    .then(data=>{
-        res.send(data);
-    })
-    .catch(error =>{
-        res.status(500).send({
-            messsage:
-            error.messsage || "some error occurred while creating the state"
+        .save(state)
+        .then(data=>{
+            res.send(data);
+        })
+        .catch(error =>{
+            res.status(500).send({
+                messsage:
+                error.messsage || "some error occurred while creating the state"
+            });
         });
-    });
 }
 
     // All state
