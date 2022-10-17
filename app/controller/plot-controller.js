@@ -26,10 +26,11 @@ exports.addPlot =  (req, res) => {
     const plot = new Plot({
         farmerId:req.body.farmerId,
         location: req.body.location,
+        state:req.body.state,
         village: req.body.village,
         district: req.body.district,
         latitude: req.body.latitude,
-        long:req.body.long,
+        longitude:req.body.longitude,
         areaOfPlot :req.body.areaOfPlot,
         perimeterOfPlot:req.body.perimeterOfPlot,
         plotShape :req.body.plotShape,

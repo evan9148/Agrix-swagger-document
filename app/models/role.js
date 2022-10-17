@@ -1,13 +1,14 @@
 module.exports = mongoose =>{
-    const state = mongoose.model(
-        "State",
+    const Role =mongoose.model(
+        "Role",
         mongoose.Schema(
             {
-                state:String,
-                id:String
+                name:String,
             },
             {timestamps:true}
         )
     );
-    return state;
-};
+    return Role;
+}
+
+

@@ -20,6 +20,7 @@ exports.cluster = (req, res) => {
 
 // Add Cluster
 exports.addCluster = (req, res) => {
+    // console.log({clusterName:req.body.clusterName})
     const cluster = new Cluster({
         clusterName: req.body.clusterName,
         clusterCode: req.body.clusterCode,
@@ -37,12 +38,12 @@ exports.addCluster = (req, res) => {
         leadDetails:req.body.leadDetails
   
     });
-
+    console.log(cluster);
     cluster
         .save(cluster)
         .then(data => {
+          console.log(data);
             res.send(data);
-            console.log(data);
         })
         .catch(error => {
             res.status(500).send({

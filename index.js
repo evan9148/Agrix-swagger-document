@@ -13,6 +13,7 @@ app.use(bodyParser.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
 
+
 // connect db
 const db = require("./app/models");
 db.mongoose
@@ -36,8 +37,15 @@ require("./app/routes/farmer-route")(app);
 require("./app/routes/plot-route")(app);
 require("./app/routes/driver-route")(app);
 require("./app/routes/state-route")(app);
-
-
+require("./app/routes/district-route")(app);
+require("./app/routes/common-route")(app);
+require("./app/routes/owner-type-route")(app);
+require("./app/routes/farm-season-route")(app);
+require("./app/routes/crop-type-route")(app);
+require("./app/routes/crop-sub-type-route")(app);
+require("./app/routes/variety-route")(app);
+require("./app/routes/user-route")(app);
+require("./app/routes/auth-route")(app);
   // set port, listen for requests
 const PORT = process.env.PORT || 8081;
 app.get("/", (req, res) => res.json({message: "Welcome to our deliveryHistory Application!"}));
@@ -45,4 +53,3 @@ app.get("/", (req, res) => res.json({message: "Welcome to our deliveryHistory Ap
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
-

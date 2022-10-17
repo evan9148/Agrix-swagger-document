@@ -4,11 +4,12 @@ module.exports = mongoose => {
       mongoose.Schema(
         {
             farmerId:String,
+            state:String,
             location: String,
             village: String,
             district: String,
             latitude: Number,
-            long:Number,
+            longitude:Number,
             areaOfPlot : String,
             perimeterOfPlot: String,
             plotShape :String,
