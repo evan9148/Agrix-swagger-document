@@ -44,8 +44,7 @@ exports.updateCropTypebyId = (req, res) =>{
             message: "Data to update can not be empty!"
         });
     }
-    const id = req.params.id;
-    CropType.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
+    CropType.findByIdAndUpdate({id: req.params._id})
         .then(data => {
         if (!data) {
             res.status(404).send({
