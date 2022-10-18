@@ -10,4 +10,14 @@ db.farmer = require("./farmer")(mongoose);
 db.plot = require("./plot-details")(mongoose);
 db.driver = require("./driver")(mongoose);
 db.state = require("./state")(mongoose);
+db.district=require("./district")(mongoose)
+db.ownerType=require('./owner-type')(mongoose)
+db.farmSeason=require('./farm-season')(mongoose);
+db.cropType=require('./crop-type')(mongoose);
+db.cropSubType=require('./crop-sub-type')(mongoose);
+db.variety=require('./variety')(mongoose);
+db.user=require('./user')(mongoose);
+db.role=require('./role')(mongoose);
+
+db.ROLES=['admin'];
 module.exports = db;

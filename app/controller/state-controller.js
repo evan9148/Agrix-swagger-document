@@ -23,7 +23,8 @@ exports.getState = (req,res) =>{
 exports.addState = (req,res) =>{
     const id=req.body._id;
     const state=new State({
-        state:req.body.state
+        state:req.body.state,
+        id:req.body.id
     });
 
     state
