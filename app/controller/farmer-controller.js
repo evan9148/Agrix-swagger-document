@@ -89,9 +89,13 @@ exports.updateFarmerById = (req, res) =>{
 
 //Get Api for farmers List By ClusterId
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> c388917189cd254d3e7146c3ec6d8f80d4259684
+=======
+
+>>>>>>> feature/auth
 exports.farmersByClusterId = (req, res) => {
   Farmer.find({clusterId:req.params.clusterId})
     .then(data => {
@@ -107,9 +111,12 @@ exports.farmersByClusterId = (req, res) => {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> c388917189cd254d3e7146c3ec6d8f80d4259684
+=======
+>>>>>>> feature/auth
 // delete farmer by Id
 exports.deleteFarmerById = (req, res) => {
   const id = req.params.id;
@@ -131,3 +138,29 @@ exports.deleteFarmerById = (req, res) => {
       });
     });
 };
+
+
+
+
+
+exports.farmerCluster =(req,res) =>{
+  // const  clusterId= req.query.clusterId;
+  //   var condition = clusterId ? { clusterId: { $regex: new RegExp(clusterId), $options: "i" } } : {};
+    Farmer.find(
+      {
+        "$or":[
+          {clusterId:{$regex:req.params.key}}
+        ]
+      }
+    )
+      .then(data => {
+        const d=res.send(data);
+        console.log(d);
+      })
+      .catch(err => {
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while retrieving ClusterId."
+        });
+      });
+}

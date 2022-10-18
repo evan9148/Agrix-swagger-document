@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> feature/auth
 exports.allAccess = (req, res) => {
     res.status(200).send("Public Content.");
   };
@@ -17,6 +20,7 @@ exports.allAccess = (req, res) => {
 
 
 
+<<<<<<< HEAD
 =======
 const db=require("../models")
 const User=db.user;
@@ -53,3 +57,5 @@ exports.createUser =  (req, res) => {
 
 }
 >>>>>>> c388917189cd254d3e7146c3ec6d8f80d4259684
+=======
+>>>>>>> feature/auth

@@ -1,6 +1,9 @@
 module.exports = mongoose =>{
     const User =mongoose.model(
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> feature/auth
         "Agrix-User",
         mongoose.Schema(
             {
@@ -13,6 +16,7 @@ module.exports = mongoose =>{
                       ref: "Role"
                     }
                   ]
+<<<<<<< HEAD
 =======
         "User-agri",
         mongoose.Schema(
@@ -31,6 +35,8 @@ module.exports = mongoose =>{
                 emailVerified:Boolean,
                 mobileNumberVerified:Boolean
 >>>>>>> c388917189cd254d3e7146c3ec6d8f80d4259684
+=======
+>>>>>>> feature/auth
             },
             {timestamps:true}
         )

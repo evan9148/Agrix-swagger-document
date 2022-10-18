@@ -45,9 +45,12 @@ exports.addCluster = (req, res) => {
           console.log(data);
             res.send(data);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
             // console.log(data);
 >>>>>>> c388917189cd254d3e7146c3ec6d8f80d4259684
+=======
+>>>>>>> feature/auth
         })
         .catch(error => {
             res.status(500).send({
