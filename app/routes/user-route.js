@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> feature/auth
 
 const { authJwt } = require("../middleware");
 const user = require("../controller/user-controller");
@@ -20,3 +24,16 @@ module.exports = function(app) {
     user.adminBoard
   );
 };
+<<<<<<< HEAD
+=======
+module.exports = app =>{
+    const user=require('../controller/user-controller')
+    var router=require('express').Router();
+
+    router.post('/',user.createUser);
+
+    app.use('/api/user',router);
+}
+>>>>>>> c388917189cd254d3e7146c3ec6d8f80d4259684
+=======
+>>>>>>> feature/auth

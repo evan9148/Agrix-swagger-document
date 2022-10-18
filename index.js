@@ -45,9 +45,20 @@ require("./app/routes/crop-type-route")(app);
 require("./app/routes/crop-sub-type-route")(app);
 require("./app/routes/variety-route")(app);
 require("./app/routes/user-route")(app);
+<<<<<<< HEAD
+<<<<<<< HEAD
 require("./app/routes/auth-route")(app);
+=======
+require("./app/routes/clusterId.route")(app);
+
+
+
+>>>>>>> c388917189cd254d3e7146c3ec6d8f80d4259684
+=======
+require("./app/routes/auth-route")(app);
+>>>>>>> feature/auth
   // set port, listen for requests
-const PORT = process.env.PORT || 8081;
+const PORT = process.env.PORT || 8181;
 app.get("/", (req, res) => res.json({message: "Welcome to our deliveryHistory Application!"}));
 
 app.listen(PORT, () => {

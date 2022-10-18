@@ -10,6 +10,10 @@ db.farmer = require("./farmer")(mongoose);
 db.plot = require("./plot-details")(mongoose);
 db.driver = require("./driver")(mongoose);
 db.state = require("./state")(mongoose);
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> feature/auth
 db.district=require("./district")(mongoose)
 db.ownerType=require('./owner-type')(mongoose)
 db.farmSeason=require('./farm-season')(mongoose);
@@ -20,4 +24,17 @@ db.user=require('./user')(mongoose);
 db.role=require('./role')(mongoose);
 
 db.ROLES=['admin'];
+<<<<<<< HEAD
+=======
+db.district = require("./district")(mongoose)
+db.ownerType = require('./owner-type')(mongoose)
+db.farmSeason = require('./farm-season')(mongoose);
+db.cropType = require('./crop-type')(mongoose);
+db.cropSubType = require('./crop-sub-type')(mongoose);
+db.variety = require('./variety')(mongoose);
+db.user = require('./user')(mongoose);
+db.clusterId = require("./clusterId-list")(mongoose);
+>>>>>>> c388917189cd254d3e7146c3ec6d8f80d4259684
+=======
+>>>>>>> feature/auth
 module.exports = db;
