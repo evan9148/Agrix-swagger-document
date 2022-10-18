@@ -9,7 +9,7 @@ module.exports = mongoose => {
             village: String,
             district: String,
             latitude: Number,
-            longitude:Number,
+            long:Number,
             areaOfPlot : String,
             perimeterOfPlot: String,
             plotShape :String,
