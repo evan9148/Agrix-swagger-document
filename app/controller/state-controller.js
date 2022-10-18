@@ -5,11 +5,11 @@ const State=db.state;
 
 // All state
 exports.getState = (req,res) =>{
-    const state=req.query.state;
-    State.find(state)
+    // const state = req.query.state;
+    State.find({})
         .then(data =>{
             if(!data)
-                res.status(404).send({messsage: "Not found State with id " + state});
+                res.status(404).send({messsage: "Not found State with id "});
             else res.send(data);
         })
         .catch(error =>{

@@ -44,7 +44,6 @@ exports.addFarmer =  (req, res) => {
                     error.message || "some error occurred while creating the farmer"
             });
         });
-
 }
 
 // Get farmer by Id
@@ -89,7 +88,10 @@ exports.updateFarmerById = (req, res) =>{
 }
 
 //Get Api for farmers List By ClusterId
+<<<<<<< HEAD
 
+=======
+>>>>>>> c388917189cd254d3e7146c3ec6d8f80d4259684
 exports.farmersByClusterId = (req, res) => {
   Farmer.find({clusterId:req.params.clusterId})
     .then(data => {
@@ -104,6 +106,10 @@ exports.farmersByClusterId = (req, res) => {
     });
 };
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> c388917189cd254d3e7146c3ec6d8f80d4259684
 // delete farmer by Id
 exports.deleteFarmerById = (req, res) => {
   const id = req.params.id;
