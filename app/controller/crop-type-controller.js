@@ -34,10 +34,9 @@ exports.addCropType = (req,res) =>{
                     error.messsage || "some error occurred while creating the croptype"
             });
         });
-<<<<<<< HEAD
+
 }
-=======
-}
+
 
 
 // update croptype...
@@ -84,4 +83,4 @@ const id = req.params.id;
             });
         });
 };
->>>>>>> feature/auth
+

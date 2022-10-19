@@ -75,10 +75,7 @@ exports.signin = (req, res) => {
       }
 
       if (!user) {
-<<<<<<< HEAD
-=======
-        console.log("no user");
->>>>>>> feature/auth
+
         return res.status(404).send({ message: "User Not found." });
       }
 
