@@ -27,7 +27,8 @@ exports.addDriver = (req,res) =>{
         contactDetails:req.body.contactDetails,
         village:req.body.village,
         district:req.body.district,
-        state:req.body.state
+        state:req.body.state,
+        clusterId:req.body.clusterId
     });
 
     driver

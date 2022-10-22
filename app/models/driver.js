@@ -1,3 +1,5 @@
+const { Schema } = require("mongoose");
+
 module.exports=mongoose =>{
     const Driver = mongoose.model(
         "Driver",
@@ -9,7 +11,8 @@ module.exports=mongoose =>{
                 contactDetails:String,
                 village:String,
                 district:String,
-                state:String
+                state:String,
+                clusterId:String
             },
             {timestamps:true}
         )

@@ -1,3 +1,5 @@
+const { Schema } = require("mongoose");
+
 module.exports = mongoose => {
     const AddFarmer = mongoose.model(
         "Farmer",
@@ -9,7 +11,7 @@ module.exports = mongoose => {
             clusterCode:String,
             ownerType: String,
             address:String,
-            clusterId:String,
+            clusterId:{type:Schema.Types.ObjectId, ref:"cluster"},
             farmingSeason: String,
             cropType: String,
             cropSubType:String,
