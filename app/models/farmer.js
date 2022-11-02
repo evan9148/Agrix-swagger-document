@@ -11,7 +11,8 @@ module.exports = mongoose => {
             clusterCode:String,
             ownerType: String,
             address:String,
-            clusterId:{type:Schema.Types.ObjectId, ref:"cluster"},
+            // clusterId:{type:Schema.Types.ObjectId, ref:"cluster"}, //impliment that wise
+            clusterId:String,
             farmingSeason: String,
             cropType: String,
             cropSubType:String,

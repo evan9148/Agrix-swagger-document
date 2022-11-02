@@ -30,7 +30,7 @@ exports.addPlot =  (req, res) => {
         village: req.body.village,
         district: req.body.district,
         latitude: req.body.latitude,
-        longitude:req.body.longitude,
+        long:req.body.long,
         areaOfPlot :req.body.areaOfPlot,
         perimeterOfPlot:req.body.perimeterOfPlot,
         plotShape :req.body.plotShape,
