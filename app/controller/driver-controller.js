@@ -3,20 +3,45 @@ const Driver = db.driver;
 
 
 // Get Driver Details
-exports.getDriver =(req,res) =>{
-    const driverId = req.query.driverId;
-    Driver.find(driverId)
-      .then(data => {
-        if (!data)
-          res.status(404).send({ message: "Not found Driver with id " + driverId });
-        else res.send(data);
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .send({ message: "Error retrieving Driver with id=" + driverId });
-      });
-  }
+// exports.getDriver =(req,res) =>{
+//     const driverId = req.query.driverId;
+//     Driver.find(driverId)
+//       .then(data => {
+//         if (!data)
+//           res.status(404).send({ message: "Not found Driver with id " + driverId });
+//         else res.send(data);
+//       })
+//       .catch(err => {
+//         res
+//           .status(500)
+//           .send({ message: "Error retrieving Driver with id=" + driverId });
+//       });
+//   }
+
+// get Driver
+exports.getDriver = async (req,res) => {
+  try {
+    const page = parseInt(req.query.page);
+    const size = parseInt(req.query.size);
+
+    const skip = (page -1) * size;
+
+    const total = await Driver.countDocuments();
+    const driver = await Driver.find().skip(skip).limit(size);
+
+    res.json({
+        driver,
+        total,
+        page, 
+        size
+    });
+} catch(error) {
+    console.log(error)
+    res.status(400).json(error)
+}
+}
+
+
 
 // Add Driver
 exports.addDriver = (req,res) =>{

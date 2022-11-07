@@ -2,20 +2,70 @@ const db = require("../models");
 const Cluster = db.cluster;
 
 
-// Get Cluster
-exports.cluster = (req, res) => {
-    const clusterCode = req.query.clusterCode;
-    var condition = clusterCode ? { clusterCode: { $regex: new RegExp(clusterCode), $options: "i" } } : {};
-    Cluster.find(condition)
-        .then(data => {
-            res.send(data);
-        })
-        .catch(err => {
-            res.status(500).send({
-                message:
-                    err.message || "Some error occurred while retrieving cluster Code."
-            });
-        });
+// // Get Cluster
+// exports.cluster = (req, res) => {
+//     const clusterCode = req.query.clusterCode;
+//     var condition = clusterCode ? { clusterCode: { $regex: new RegExp(clusterCode), $options: "i" } } : {};
+//     Cluster.find(condition)
+//         .then(data => {
+//             res.send(data);
+//         })
+//         .catch(err => {
+//             res.status(500).send({
+//                 message:
+//                     err.message || "Some error occurred while retrieving cluster Code."
+//             });
+//         });
+// }
+
+// pagination 1
+// exports.cluster = (req, res) => {
+//   const {page,limit} = req.query
+//   if (page <= 0){
+//       res.status(400).json({
+//           error : `page number not found ${page}`
+//       })
+//   }
+//   Cluster.find({})
+//     .limit(limit*1)
+//     .skip((page - 1) * limit)
+//     .then(data => {
+//       res.status(200).json({
+//         message: data.length
+//             ? `Found ${data.length} results for the searched term`
+//             : `Found nothing`,
+//         My_data: data,
+//         count
+      
+//       })
+//     })
+//     .catch(err => {
+//       res
+//         .status(500)
+//         .send({ message: "Error retrieving Cluster with id=" + id });
+//     });
+//   };
+
+exports.cluster = async (req,res) => {
+  try {
+    const page = parseInt(req.query.page);
+    const size = parseInt(req.query.size);
+
+    const skip = (page -1) * size;
+
+    const total = await Cluster.countDocuments();
+    const cluster = await Cluster.find().skip(skip).limit(size);
+
+    res.json({
+        cluster,
+        total,
+        page, 
+        size
+    });
+} catch(error) {
+    console.log(error)
+    res.status(400).json(error)
+}
 }
 
 // Add Cluster
