@@ -4,7 +4,7 @@ const Dropdown = db.dropdown;
 // get dropdown..
 exports.getDropdown = (req, res) => {
     const column = req.query.column;
-    Dropdown.find({column_name: column})
+    Dropdown.find({columnName: column})
       .then(data => {
         if (!data)
           res.status(404).send({ message: "Not found Dropdown with id " + column });
@@ -19,9 +19,9 @@ exports.getDropdown = (req, res) => {
   
   
 // add dropdown...
-exports.addDropdown = (req,res) =>{
+exports.addDropdown = (req,res) => {
 const dropdown = new Dropdown({
-    column_name: req.body.column_name,
+    columnName: req.body.columnName,
     name: req.body.name
 });
 
