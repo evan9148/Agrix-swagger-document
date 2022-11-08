@@ -62,10 +62,10 @@ exports.cluster = async (req,res) => {
         page, 
         size
     });
-} catch(error) {
-    console.log(error)
-    res.status(400).json(error)
-}
+  } catch(error) {
+      console.log(error)
+      res.status(400).json(error)
+  }
 }
 
 // Add Cluster

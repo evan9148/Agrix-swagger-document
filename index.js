@@ -16,6 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // connect db
 const db = require("./app/models");
+const { mongoose } = require("./app/models");
 db.mongoose
   .connect(db.url, {
     useNewUrlParser: true,
@@ -45,18 +46,21 @@ require("./app/routes/crop-type-route")(app);
 require("./app/routes/crop-sub-type-route")(app);
 require("./app/routes/variety-route")(app);
 require("./app/routes/user-route")(app);
-
 require("./app/routes/auth-route")(app);
-
 require("./app/routes/clusterId.route")(app);
-
-
-
+require("./app/routes/machine-route")(app);
+require("./app/routes/alldropdown-route")(app);
 require("./app/routes/auth-route")(app);
+require("./app/routes/implement-type-route")(app);
+require("./app/routes/category-route")(app);
+require("./app/routes/identifier-route")(app);
+
 
   // set port, listen for requests
 const PORT = process.env.PORT || 8081;
 app.get("/", (req, res) => res.json({message: "Welcome to our deliveryHistory Application!"}));
+
+
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
