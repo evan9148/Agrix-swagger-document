@@ -1,16 +1,14 @@
 module.exports = mongoose =>{
-    const Identifier = mongoose.model(
-        "Identifier",
+    const implementIdentifier = mongoose.model(
+        "implementIdentifier",
         mongoose.Schema(
             {
                 name: {
                     type: String,
-                    unique: true,
-                    required: true
                 }
             },
             {timestamps:true}
         )
     );
-    return Identifier;
+    return implementIdentifier;
 };

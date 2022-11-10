@@ -3,11 +3,8 @@ module.exports = mongoose =>{
         "implementType",
         mongoose.Schema(
             {
-                name: {
-                    type: String,
-                    unique: true,
-                    required: true
-                }
+                name: String,
+                implementTypeidentifier: String
             },
             {timestamps:true}
         )

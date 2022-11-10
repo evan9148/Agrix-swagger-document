@@ -1,84 +1,72 @@
 const db = require("../models");
 const Machine = db.machine;
-const Counter = db.counter;
 
+// Add Machine
+exports.addMachine = async(req,res) => {
+  var value = 1
+  var code = req.body.implementCode
+  var d = await Machine.find({implementCode: code+value});
 
-// Add Driver
-exports.addMachine = (req,res) => {
-  Counter.findOneAndUpdate(
-    {id: "autoval"},
-    {"$inc": {"sequence": 1}},
-    {new:true},(err,updatedval) => {
-      let sequenceId;
-      if (updatedval == null){
-        const newval = new Counter({
-          id: "autoval",
-          sequence: 1
+  while (d.length>0){
+    value+=1
+    d = await Machine.find({implementCode: code+value});
+  }
+  code+=value
+
+  const machine = new Machine ({
+    implementCode: code,
+    ownerShip: req.body.ownerShip,
+    implementType: req.body.implementType,
+    implementCategory: req.body.implementCategory,
+    HorsePower: req.body.HorsePower,
+    WheelDrive: req.body.WheelDrive,
+    machineBrand: req.body.machineBrand,
+    model: req.body.model,
+    cluster: req.body.cluster,
+    clusterCode: req.body.clusterCode,
+    implementIdentifier: req.body.implementIdentifier,
+    imieNo: req.body.imieNo,
+    simNo: req.body.simNo,
+    simType: req.body.simType
+  });
+
+    machine
+        .save()
+        .then(data =>{
+            res.send(data);
+            console.log(data);
         })
-        newval.save()
-        sequenceId=1
-      }else{
-        sequenceId = updatedval.sequence
-      }
-
-      const machine = new Machine ({
-        implementCode: req.body.implementCode,sequenceId,
-        implementType: req.body.implementType,
-        implementCategory: req.body.implementCategory,
-        HP: req.body.HP,
-        WD: req.body.WD,
-        make: req.body.make,
-        model: req.body.model,
-        cluster: req.body.cluster,
-        clusterCode: req.body.clusterCode,
-        implementIdentifier: req.body.implementIdentifier,
-        imieNo: req.body.imieNo,
-        simNo: req.body.simNo,
-        simType: req.body.simType
-      });
-
-        machine
-            .save()
-    }
-  )
-    .then(data =>{
-        res.send(data);
-        console.log(data)
-    })
-    .catch(error =>{
-        res.status(500).send({
-            message:
-                error.message || "some error occurred while creating the machine"
+        .catch(error =>{
+            res.status(500).send({
+                message:
+                    error.message || "some error occurred while creating the machine"
+            });
         });
-    });
 }
 
 
 
 // Get Machine
-exports.getMachine = (req, res) => {
-  const {page,limit} = req.query
-  if (page <= 0){
-      res.status(400).json({
-          error : `page number not found ${page}`
-      })
-  }
-  Machine.find()
-    .limit(limit*1)
-    .skip((page - 1) * limit)
-  .then(data => {
-    res.status(200).json(
-      // message: data.length
-      //     ? `Found ${data.length} results for the searched term`
-      //     : `Found nothing`,
-      data
-    )
-  })
-  .catch(err => {
-    res.status(500).send({
-      message: "Error retrieving machine" + err
+exports.getMachine = async (req, res) => {
+  try {
+    const page = parseInt(req.query.page);
+    const size = parseInt(req.query.size);
+
+    const skip = (page -1) * size;
+
+    const total = await Machine.countDocuments();
+    const machine = await Machine.find().skip(skip).limit(size);
+
+    res.json({
+        machine,
+        total,
+        page, 
+        size
     });
-  });
+  } catch(error) {
+      console.log(error)
+      res.status(400).json(error)
+  }
 }
 
 

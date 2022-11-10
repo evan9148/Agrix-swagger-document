@@ -1,14 +1,14 @@
 const db = require("../models");
-const Identifier = db.identifier;
+const ImplementIdentifier = db.implementIdentifer;
 
 
 // get Identifier...
 exports.getIdentifier = (req, res) => {
-    const firstName = req.params.firstName;
-    Identifier.find({firstName: firstName})
+    // const Name = req.params.Name;
+    ImplementIdentifier.find()
       .then(data => {
         if (!data)
-          res.status(404).send({ message: "Not found Identifier with firstName" + firstName });
+          res.status(404).send({ message: "Not found Identifier"});
         else res.send(data);
       })
       .catch(err => {
@@ -22,9 +22,8 @@ exports.getIdentifier = (req, res) => {
 
 // add Identifier...
 exports.addIdentifier = (req,res) => {
-  const identifier = new Identifier({
-      firstName: req.body.firstName,
-      name: req.body.name,
+  const identifier = new ImplementIdentifier({
+      name: req.body.name
   });
 
   identifier

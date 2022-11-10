@@ -49,11 +49,13 @@ require("./app/routes/user-route")(app);
 require("./app/routes/auth-route")(app);
 require("./app/routes/clusterId.route")(app);
 require("./app/routes/machine-route")(app);
-require("./app/routes/alldropdown-route")(app);
 require("./app/routes/auth-route")(app);
 require("./app/routes/implement-type-route")(app);
 require("./app/routes/category-route")(app);
-require("./app/routes/identifier-route")(app);
+require("./app/routes/implement-identifier-route")(app);
+require("./app/routes/vendor-route")(app);
+require("./app/routes/machine-hp-route")(app);
+require("./app/routes/machine-brand-route")(app);
 
 
   // set port, listen for requests

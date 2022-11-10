@@ -19,11 +19,12 @@ db.variety = require('./variety')(mongoose);
 db.user = require('./user')(mongoose);
 db.role = require('./role')(mongoose);
 db.machine = require("./machine")(mongoose);
-db.dropdown = require("./alldropdown")(mongoose);
 db.implementType = require("./implement-type")(mongoose);
 db.category = require("./category")(mongoose);
-db.identifier = require("./identifier")(mongoose);
-db.counter = require("./counter")(mongoose);
+db.implementIdentifer = require("./implement-identifier")(mongoose);
+db.vendor = require("./vendor")(mongoose);
+db.machinehp = require("./machine-hp")(mongoose);
+db.machinebrand = require("./machine-brand")(mongoose);
 
 db.ROLES = ['admin'];
 module.exports = db;

@@ -1,13 +1,13 @@
 const { authJwt } = require("../middleware");
 
 module.exports = app => {
-    const category = require("../controller/category-controller");
+    const machinebrand = require("../controller/machine-brand-controller");
     var router = require("express").Router();
 
-    router.get("/", [authJwt.verifyToken,authJwt.isAdmin],category.getCategory);
-    router.post("/", [authJwt.verifyToken,authJwt.isAdmin], category.addCategory);
+    router.get("/", [authJwt.verifyToken,authJwt.isAdmin], machinebrand.getMachinebrand);
+    router.post("/", [authJwt.verifyToken,authJwt.isAdmin], machinebrand.addMachinebrand);
     // router.put("/:id", [authJwt.verifyToken,authJwt.isAdmin],machine.updateMachineById);
     // router.delete("/:id", [authJwt.verifyToken,authJwt.isAdmin],machine.deleteMachineById);
 
-    app.use('/api/category', router);
+    app.use('/api/machinebrand', router);
 };

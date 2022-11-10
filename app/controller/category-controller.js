@@ -4,11 +4,11 @@ const Category = db.category;
 
 // get Category..
 exports.getCategory = (req, res) => {
-    const firstName = req.params.firstName;
-    Category.find({firstName: firstName})
+    // const Name = req.params.Name;
+    Category.find()
       .then(data => {
         if (!data)
-          res.status(404).send({ message: "Not found Category with firstName" + firstName });
+          res.status(404).send({ message: "Not found Category"});
         else res.send(data);
       })
       .catch(err => {
@@ -22,8 +22,8 @@ exports.getCategory = (req, res) => {
 // add Category...
 exports.addCategory = (req,res) =>{
   const Implementcategory = new Category({
-      firstName: req.body.firstName,
       name: req.body.name,
+      shortName: req.body.shortName,
   });
 
   Implementcategory

@@ -3,11 +3,8 @@ module.exports = mongoose =>{
         "Category",
         mongoose.Schema(
             {
-                name: {
-                    type: String,
-                    unique: true,
-                    required: true
-                }
+                name: String,
+                shortName: String
             },
             {timestamps:true}
         )
