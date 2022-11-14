@@ -4,7 +4,6 @@ const ImplementIdentifier = db.implementIdentifer;
 
 // get Identifier...
 exports.getIdentifier = (req, res) => {
-    // const Name = req.params.Name;
     ImplementIdentifier.find()
       .then(data => {
         if (!data)

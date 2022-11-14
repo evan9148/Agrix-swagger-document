@@ -50,7 +50,7 @@ require("./app/routes/auth-route")(app);
 require("./app/routes/clusterId.route")(app);
 require("./app/routes/machine-route")(app);
 require("./app/routes/auth-route")(app);
-require("./app/routes/implement-type-route")(app);
+require("./app/routes/implement-name-route")(app);
 require("./app/routes/category-route")(app);
 require("./app/routes/implement-identifier-route")(app);
 require("./app/routes/vendor-route")(app);

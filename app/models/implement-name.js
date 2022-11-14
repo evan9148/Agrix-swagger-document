@@ -1,13 +1,13 @@
 module.exports = mongoose =>{
-    const implementType = mongoose.model(
-        "implementType",
+    const implementname = mongoose.model(
+        "implementname",
         mongoose.Schema(
             {
                 name: String,
-                implementTypeidentifier: String
+                shortName: String
             },
             {timestamps:true}
         )
     );
-    return implementType;
+    return implementname;
 };

@@ -1,11 +1,10 @@
 const db = require("../models");
-const ImplementType = db.implementType;
+const ImplementName = db.implementName;
 
 
 // get implementType..
-exports.getImplementType = (req, res) => {
-    // const Name = req.params.Name;
-    ImplementType.find()
+exports.getImplementName = (req, res) => {
+  ImplementName.find()
       .then(data => {
         if (!data)
           res.status(404).send({ message: "Not found" });
@@ -20,13 +19,13 @@ exports.getImplementType = (req, res) => {
   
   
 // add Implementype...
-exports.addImplementType = (req,res) =>{
-  const Implementype = new ImplementType({
+exports.addImplementName = (req,res) =>{
+  const Implementname = new ImplementName({
         name: req.body.name,
-        implementTypeidentifier: req.body.implementTypeidentifier
+        shortName: req.body.shortName
   });
 
-  Implementype
+  Implementname
       .save()
       .then(data => {
           res.send(data);
