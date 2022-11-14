@@ -64,8 +64,8 @@ exports.farmerById = (req, res) => {
 
 
 
-// update farmer by Id
-exports.updateFarmerById = (req, res) =>{
+// update farmer by Id..
+exports.updateFarmerById = (req, res) => {
   if (!req.body) {
     return res.status(400).send({
       message: "Data to update can not be empty!"
@@ -88,7 +88,6 @@ exports.updateFarmerById = (req, res) =>{
 }
 
 //Get Api for farmers List By ClusterId
-
 exports.farmersByClusterId = (req, res) => {
   Farmer.find({clusterId:req.params.clusterId})
     .then(data => {
@@ -128,9 +127,7 @@ exports.deleteFarmerById = (req, res) => {
 
 
 
-
-
-exports.farmerCluster =(req,res) =>{
+exports.farmerCluster = (req,res) =>{
   // const  clusterId= req.query.clusterId;
   //   var condition = clusterId ? { clusterId: { $regex: new RegExp(clusterId), $options: "i" } } : {};
     Farmer.find(

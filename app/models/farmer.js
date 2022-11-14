@@ -1,5 +1,3 @@
-const { Schema } = require("mongoose");
-
 module.exports = mongoose => {
     const AddFarmer = mongoose.model(
         "Farmer",
