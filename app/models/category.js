@@ -1,6 +1,6 @@
 module.exports = mongoose =>{
     const Category = mongoose.model(
-        "Category",
+        "Impliment_Category",
         mongoose.Schema(
             {
                 name: String,
