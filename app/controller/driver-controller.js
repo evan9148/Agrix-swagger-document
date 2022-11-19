@@ -94,13 +94,16 @@ exports.updateDriverById = (req, res) => {
     });
   }
   const id = req.params.id;
-  Driver.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
+  Driver.findByIdAndUpdate(id, req.body, {new : true, useFindAndModify: false })
     .then(data => {
       if (!data) {
         res.status(404).send({
           message: `Cannot update driver with id=${id}. Maybe driver was not found!`
         });
-      } else res.send({ message: "driver was updated successfully."});
+      } else res.send({ 
+        message: "driver was updated successfully.",
+        driver:data
+    });
     })
     .catch(err => {
       res.status(500).send({
