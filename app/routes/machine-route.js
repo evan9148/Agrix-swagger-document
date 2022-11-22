@@ -4,7 +4,8 @@ module.exports = app => {
     const machine = require("../controller/machine-controller");
     var router = require("express").Router();
 
-    router.get("/",[authJwt.verifyToken,authJwt.isAdmin],machine.getMachine);
+    router.get("/",[authJwt.verifyToken,authJwt.isAdmin],machine.allMachine);
+    router.get("/page",[authJwt.verifyToken,authJwt.isAdmin],machine.machine);
     router.get("/:id",[authJwt.verifyToken,authJwt.isAdmin],machine.machineById);
     router.post("/", [authJwt.verifyToken,authJwt.isAdmin], machine.addMachine);
     router.put("/:id", [authJwt.verifyToken,authJwt.isAdmin],machine.updateMachineById);

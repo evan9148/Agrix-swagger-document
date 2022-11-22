@@ -4,7 +4,8 @@ module.exports = app => {
     var router = require("express").Router();
 
 
-    router.get("/", [authJwt.verifyToken,authJwt.isAdmin],farmer.farmer);
+    router.get("/page", [authJwt.verifyToken,authJwt.isAdmin],farmer.farmer);
+    router.get("/", [authJwt.verifyToken,authJwt.isAdmin],farmer.allFarmer);
     router.get("/:id",[authJwt.verifyToken,authJwt.isAdmin],farmer.farmerById);
     router.post("/", [authJwt.verifyToken,authJwt.isAdmin],farmer.addFarmer);
     router.put("/:id",[authJwt.verifyToken,authJwt.isAdmin],farmer.updateFarmerById);
