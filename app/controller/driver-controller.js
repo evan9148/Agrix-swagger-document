@@ -3,23 +3,24 @@ const Driver = db.driver;
 
 
 // Get Driver Details
-// exports.getDriver =(req,res) =>{
-//     const driverId = req.query.driverId;
-//     Driver.find(driverId)
-//       .then(data => {
-//         if (!data)
-//           res.status(404).send({ message: "Not found Driver with id " + driverId });
-//         else res.send(data);
-//       })
-//       .catch(err => {
-//         res
-//           .status(500)
-//           .send({ message: "Error retrieving Driver with id=" + driverId });
-//       });
-//   }
+exports.allDriver = (req,res) =>{
+    const driverId = req.query.driverId;
+    Driver.find(driverId)
+      .then(data => {
+        if (!data)
+          res.status(404).send({ message: "Not found Driver with id " + driverId });
+        else res.send(data);
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .send({ message: "Error retrieving Driver with id=" + driverId });
+      });
+  }
 
-// get Driver
-exports.getDriver = async (req,res) => {
+
+// get Driver by page..
+exports.Driver = async (req,res) => {
   try {
     const page = parseInt(req.query.page);
     const size = parseInt(req.query.size);
@@ -69,6 +70,7 @@ exports.addDriver = (req,res) =>{
             });
         });
 }
+
 
 // Get driver by Id
 exports.driverById = (req, res) => {

@@ -3,8 +3,8 @@ module.exports = mongoose => {
       "Plot-detail",
       mongoose.Schema(
         {
-            farmerId:String,
-            state:String,
+            farmerId: {type: mongoose.Schema.Types.ObjectId, ref: "farmer"},
+            state: {type: mongoose.Schema.Types.ObjectId, ref: "state"},
             location: String,
             village: String,
             district: String,

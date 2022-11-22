@@ -5,7 +5,7 @@ module.exports = mongoose => {
             {
                 name: String,
                 shortName: String,
-                stateId: [{ type: mongoose.Schema.Types.ObjectId, ref: "state"}],
+                stateId: { type: mongoose.Schema.Types.ObjectId, ref: "state"},
 
             },
             { timestamps: true }

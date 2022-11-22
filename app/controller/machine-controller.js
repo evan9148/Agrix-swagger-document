@@ -48,8 +48,24 @@ exports.addMachine = async (req, res) => {
     });
 };
 
+
+exports.allMachine = (req,res) =>{
+  Machine.find()
+    .then(data => {
+      if (!data)
+        res.status(404).send({ message: "Not found Machine " });
+      else res.send(data);
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .send({ message: "Error retrieving Machine" });
+    });
+}
+
+
 // Get Machine
-exports.getMachine = async (req, res) => {
+exports.machine = async (req, res) => {
   try {
     const page = parseInt(req.query.page);
     const size = parseInt(req.query.size);
@@ -70,6 +86,7 @@ exports.getMachine = async (req, res) => {
     res.status(400).json(error);
   }
 };
+
 
 // get api for machine...
 exports.machineById = (req, res) => {

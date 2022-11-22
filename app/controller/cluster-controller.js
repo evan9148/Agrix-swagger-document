@@ -46,6 +46,7 @@ const Cluster = db.cluster;
 //     });
 //   };
 
+
 exports.cluster = async (req,res) => {
   try {
     const page = parseInt(req.query.page);
@@ -67,6 +68,24 @@ exports.cluster = async (req,res) => {
       res.status(400).json(error)
   }
 }
+
+
+// Get Cluster
+exports.allCluster = (req, res) => {
+  const clusterCode = req.query.clusterCode;
+  var condition = clusterCode ? { clusterCode: { $regex: new RegExp(clusterCode), $options: "i" } } : {};
+  Cluster.find(condition)
+      .then(data => {
+          res.send(data);
+      })
+      .catch(err => {
+          res.status(500).send({
+              message:
+                  err.message || "Some error occurred while retrieving cluster Code."
+          });
+      });
+}
+
 
 // Add Cluster
 exports.addCluster = (req, res) => {

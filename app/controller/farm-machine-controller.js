@@ -1,6 +1,8 @@
 const db = require("../models");
 const FarmMachine = db.farmMachine;
 
+
+// add Farm machine..
 exports.operationStart = (req, res) => {
     if (!req.body.phoneNumber){
         res.status(400).send({message:"Content can not be empty"});
@@ -31,7 +33,9 @@ exports.operationStart = (req, res) => {
         });
 }
 
-exports.operationStop =(req,res) =>{
+
+// update farm-machine...
+exports.operationStop = (req,res) => {
     if (!req.body) {
         return res.status(400).send({
           message: "Data to update can not be empty!"
@@ -55,21 +59,46 @@ exports.operationStop =(req,res) =>{
 
 }
 
+
+// Get Farm-machine..
 exports.operationAll =(req,res) =>{
   const phoneNumber = req.query.phoneNumber;
-    var condition = phoneNumber ? { phoneNumber: { $regex: new RegExp(phoneNumber), $options: "i" } } : {};
-    FarmMachine.find(condition)
-      .then(data => {
-        res.send(data);
-      })
-      .catch(err => {
-        res.status(500).send({
-          message:
-            err.message || "Some error occurred while retrieving FarmMachine."
-        });
+  var condition = phoneNumber ? { phoneNumber: { $regex: new RegExp(phoneNumber), $options: "i" } } : {};
+  FarmMachine.find(condition)
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving FarmMachine."
       });
-    }
+    });
+}
     
+
+// Get Farm-machine By page..
+exports.operationByPage = async (req, res) => {
+  try {
+    const page = parseInt(req.query.page);
+    const size = parseInt(req.query.size);
+
+    const skip = (page - 1) * size;
+
+    const total = await FarmMachine.countDocuments();
+    const farmMachine = await FarmMachine.find().skip(skip).limit(size);
+
+    res.json({
+      farmMachine,
+      total,
+      page,
+      size,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(400).json(error);
+  }
+};
     
     
 exports.operationByMachineId = (req,resp)=>{

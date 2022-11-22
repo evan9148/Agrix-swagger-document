@@ -27,8 +27,10 @@ module.exports = app => {
     router.post("/", [authJwt.verifyToken,authJwt.isAdmin], plot.addPlot);
     router.get("/:farmerId", [authJwt.verifyToken,authJwt.isAdmin],plot.plotsByFarmerId);
     router.get("/plotById/:id",[authJwt.verifyToken,authJwt.isAdmin], plot.plotById);
+    router.get("/plotCount/:farmerid", [authJwt.verifyToken,authJwt.isAdmin],plot.plotCountByFarmerId);
+    router.get("/page/:farmerid", [authJwt.verifyToken,authJwt.isAdmin],plot.plotListByPage);
     router.put("/:id", [authJwt.verifyToken,authJwt.isAdmin],plot.updatePlotById);
     router.delete("/:id", [authJwt.verifyToken,authJwt.isAdmin],plot.deletePlotById);
 
     app.use('/api/plot', router);
-  };
+};

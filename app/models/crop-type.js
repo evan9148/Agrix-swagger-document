@@ -10,13 +10,6 @@
 //     return CropType;
 // };
 
-
-
-
-
-
-
-
 module.exports = moogose =>{
     const CropType=moogose.model(
         'croptype',

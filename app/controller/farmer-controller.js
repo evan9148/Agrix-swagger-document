@@ -1,8 +1,8 @@
 const db = require("../models");
 const Farmer = db.farmer;
 
-// Get Farmer Details
-exports.farmer =(req,res) =>{
+// Get All Farmer Details...
+exports.allFarmer =(req,res) =>{
     const  farmerId= req.query.farmerId;
       var condition = farmerId ? { farmerId: { $regex: new RegExp(farmerId), $options: "i" } } : {};
       Farmer.find(condition)
@@ -15,6 +15,30 @@ exports.farmer =(req,res) =>{
               err.message || "Some error occurred while retrieving FarmerId."
           });
         });
+}
+
+
+// Get All Farmer By page...
+exports.farmer = async (req,res) => {
+  try {
+    const page = parseInt(req.query.page);
+    const size = parseInt(req.query.size);
+
+    const skip = (page -1) * size;
+
+    const total = await Farmer.countDocuments();
+    const farmer = await Farmer.find().skip(skip).limit(size);
+
+    res.json({
+        farmer,
+        total,
+        page, 
+        size
+    });
+  } catch (error) {
+      console.log(error)
+      res.status(400).json(error)
+  }
 }
 
 // Add for farmer...!
