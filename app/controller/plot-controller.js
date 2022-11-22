@@ -1,8 +1,8 @@
 const db = require("../models");
 const Plot = db.plot;
 
-// Get All Plot Details...
-exports.plot = (req,res) =>{
+// Get Farmer Details
+exports.plot =(req,res) =>{
   const farmerId = req.query.farmerId;
   Plot.find(farmerId)
     .then(data => {
@@ -18,7 +18,9 @@ exports.plot = (req,res) =>{
 }
 
 
-// Add Plot
+
+
+// Add  Farmer Plot
 exports.addPlot =  (req, res) => {
   const id = req.body._id;
     const plot = new Plot({
@@ -52,8 +54,7 @@ exports.addPlot =  (req, res) => {
 
 }
 
-
-exports.plotsByFarmerId = (req,res) => {
+exports.plotsByFarmerId =(req,res) =>{
   const farmerId = req.params.farmerId;
   Plot.find({'farmerId':farmerId})
     .then(data => {
@@ -67,7 +68,6 @@ exports.plotsByFarmerId = (req,res) => {
         .send({ message: "Error retrieving Farmer plot with id=" + farmerId });
     });
 }
-
 
 exports.plotById = (req, res) => {
   const id = req.params.id;
@@ -84,50 +84,6 @@ exports.plotById = (req, res) => {
     });
 };
 
-
-//Get PlotList By Page and FarmerId..
-exports.plotListByPage = async (req, res) => {
-  try {
-    const page = parseInt(req.query.page);
-    const size = parseInt(req.query.size);
-    const skip = (page - 1) * size;
-    const plot = await Plot.find().skip(skip).limit(size);
-    res.json({
-      plot,
-      page,
-      size,
-    });
-  } catch (error) {
-    console.log(error);
-    res.status(400).json(error);
-  }
-};
-
-
-// count the plot by farmerId.. 
-exports.plotCountByFarmerId = (req, res) => {
-  // const farmerId = req.params.farmerId;
-  Plot.find({farmerid: req.params.farmerId})
-    .then((plotList) => {
-      if (!plotList) {
-        res
-          .status(404)
-          .send({ message: "Not found Farmer plot with id" + farmerid });
-      } else if (plotList) {
-        plotCount = plotList.length;
-        console.log("plotCount", plotCount);
-        res.json({
-          plotList,
-          plotCount,
-        });
-      }
-    })
-    .catch((err) => {
-      res
-        .status(500)
-        .send({ message: "Error retrieving Farmer plot with id=" + farmerId });
-    });
-};  
 
 
 exports.updatePlotById = (req, res) =>{
@@ -147,7 +103,7 @@ exports.updatePlotById = (req, res) =>{
     })
     .catch(err => {
       res.status(500).send({
-        message: "Error updating Plot with id =" + id
+        message: "Error updating Plot with id=" + id
       });
     });
 }

@@ -18,33 +18,6 @@ const Cluster = db.cluster;
 //         });
 // }
 
-// pagination 1
-// exports.cluster = (req, res) => {
-//   const {page,limit} = req.query
-//   if (page <= 0){
-//       res.status(400).json({
-//           error : `page number not found ${page}`
-//       })
-//   }
-//   Cluster.find({})
-//     .limit(limit*1)
-//     .skip((page - 1) * limit)
-//     .then(data => {
-//       res.status(200).json({
-//         message: data.length
-//             ? `Found ${data.length} results for the searched term`
-//             : `Found nothing`,
-//         My_data: data,
-//         count
-      
-//       })
-//     })
-//     .catch(err => {
-//       res
-//         .status(500)
-//         .send({ message: "Error retrieving Cluster with id=" + id });
-//     });
-//   };
 
 
 exports.cluster = async (req,res) => {
