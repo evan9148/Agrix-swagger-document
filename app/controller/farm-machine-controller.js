@@ -86,7 +86,7 @@ exports.operationByPage = async (req, res) => {
     const skip = (page - 1) * size;
 
     const total = await FarmMachine.countDocuments();
-    const farmMachine = await FarmMachine.find().skip(skip).limit(size);
+    const farmMachine = await FarmMachine.find().sort([['createdAt','desc']]).skip(skip).limit(size);
 
     res.json({
       farmMachine,
