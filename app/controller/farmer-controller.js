@@ -27,7 +27,7 @@ exports.farmer = async (req,res) => {
     const skip = (page -1) * size;
 
     const total = await Farmer.countDocuments();
-    const farmer = await Farmer.find().sort([['createdAt','desc']]).skip(skip).limit(size);
+    const farmer = await Farmer.find().skip(skip).limit(size);
 
     res.json({
         farmer,
