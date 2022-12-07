@@ -10,7 +10,7 @@ module.exports = app => {
     router.post("/", [authJwt.verifyToken,authJwt.isAdmin],farmer.addFarmer);
     router.put("/:id",[authJwt.verifyToken,authJwt.isAdmin],farmer.updateFarmerById);
     router.delete("/:id",[authJwt.verifyToken,authJwt.isAdmin],farmer.deleteFarmerById);
-    // router.get("/cluster/:clusterId",[authJwt.verifyToken,authJwt.isAdmin],farmer.farmersByClusterId);
+    router.get("/cluster/:clusterid",[authJwt.verifyToken,authJwt.isAdmin],farmer.farmersByClusterId);
     
      // router.get("/cluster/:clusterId",[authJwt.verifyToken,authJwt.isAdmin],farmer.farmersByClusterId);
     router.get("/clusterSearch/:key",[authJwt.verifyToken,authJwt.isAdmin],farmer.farmerCluster);

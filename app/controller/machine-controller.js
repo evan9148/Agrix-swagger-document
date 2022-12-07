@@ -90,7 +90,7 @@ exports.machine = async (req, res) => {
 
 // get api for machine...
 exports.machineById = (req, res) => {
-  const id = req.params.id;
+  const id = { $regex: ".*" + req.params.id + ".*" , $options: "i" };
   Machine.findById(id)
     .then((data) => {
       if (!data)

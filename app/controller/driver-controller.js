@@ -3,20 +3,20 @@ const Driver = db.driver;
 
 
 // Get Driver Details
-exports.allDriver = (req,res) =>{
-    const driverId = req.query.driverId;
-    Driver.find(driverId)
-      .then(data => {
-        if (!data)
-          res.status(404).send({ message: "Not found Driver with id " + driverId });
-        else res.send(data);
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .send({ message: "Error retrieving Driver with id=" + driverId });
-      });
-  }
+exports.allDriver = (req,res) => {
+  const driverId = req.query.driverId;
+  Driver.find(driverId)
+    .then(data => {
+      if (!data)
+        res.status(404).send({ message: "Not found Driver with id " + driverId });
+      else res.send(data);
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .send({ message: "Error retrieving Driver with id=" + driverId });
+    });
+}
 
 
 // get Driver by page..
@@ -74,7 +74,7 @@ exports.addDriver = (req,res) =>{
 
 // Get driver by Id
 exports.driverById = (req, res) => {
-  const id = req.params.id;
+  const id = { $regex: ".*" + req.params.id + ".*" , $options: "i" };
   Driver.findById(id)
     .then(data => {
       if (!data)
@@ -83,10 +83,11 @@ exports.driverById = (req, res) => {
     })
     .catch(err => {
       res.status(500).send({
-        message: "Error retrieving Driver with id=" + id 
+        message: "Error retrieving Driver with id=" + id
       });
     });
 };
+
 
 // Edit/update  Driver Id
 exports.updateDriverById = (req, res) => {

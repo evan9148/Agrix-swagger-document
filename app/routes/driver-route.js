@@ -1,6 +1,6 @@
 const authJwt = require("../middleware/authJwt.js");
 
-module.exports = app =>{
+module.exports = app => {
     const driver=require("../controller/driver-controller.js");
     var router = require("express").Router();
 
@@ -10,8 +10,6 @@ module.exports = app =>{
     router.get("/:id"  ,[authJwt.verifyToken,authJwt.isAdmin],driver.driverById)
     router.put("/:id"   ,[authJwt.verifyToken,authJwt.isAdmin],driver.updateDriverById)
     router.delete("/:id"  ,[authJwt.verifyToken,authJwt.isAdmin],driver.deleteDriverById)
-
-
 
     app.use("/api/driver" ,router);
 };

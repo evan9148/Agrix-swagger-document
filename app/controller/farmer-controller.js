@@ -3,18 +3,18 @@ const Farmer = db.farmer;
 
 // Get All Farmer Details...
 exports.allFarmer =(req,res) =>{
-    const  farmerId= req.query.farmerId;
-      var condition = farmerId ? { farmerId: { $regex: new RegExp(farmerId), $options: "i" } } : {};
-      Farmer.find(condition)
-        .then(data => {
-          res.send(data);
-        })
-        .catch(err => {
-          res.status(500).send({
-            message:
-              err.message || "Some error occurred while retrieving FarmerId."
-          });
-        });
+  const  farmerId = req.query.farmerId;
+  var condition = farmerId ? { farmerId: { $regex: new RegExp(farmerId), $options: "i" } } : {};
+  Farmer.find(condition)
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving FarmerId."
+      });
+    });
 }
 
 
@@ -72,7 +72,7 @@ exports.addFarmer =  (req, res) => {
 
 // Get farmer by Id
 exports.farmerById = (req, res) => {
-  const id = req.params.id;
+  const id = { $regex: ".*" + req.params.id + ".*" , $options: "i" };
   Farmer.findById(id)
     .then(data => {
       if (!data)
@@ -113,7 +113,8 @@ exports.updateFarmerById = (req, res) => {
 
 //Get Api for farmers List By ClusterId
 exports.farmersByClusterId = (req, res) => {
-  Farmer.find({clusterId:req.params.clusterId})
+  const clusterid = req.params.clusterId
+  Farmer.find({clusterId: clusterid})
     .then(data => {
       if (!data)
         res.status(404).send({ message: "Not found Farmer with id " + clusterid });

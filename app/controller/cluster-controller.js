@@ -98,7 +98,7 @@ exports.addCluster = (req, res) => {
 }
 
 exports.clusterById = (req, res) => {
-    const id = req.params.id;
+    const id = { $regex: ".*" + req.params.id + ".*" , $options: "i" };
     Cluster.findById(id)
       .then(data => {
         if (!data)

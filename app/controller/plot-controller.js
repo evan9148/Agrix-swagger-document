@@ -54,7 +54,7 @@ exports.addPlot =  (req, res) => {
 
 
 exports.plotsByFarmerId = (req,res) => {
-  const farmerId = req.params.farmerId;
+  const farmerId = { $regex: ".*" + req.params.farmerId + ".*" , $options: "i" };
   Plot.find({'farmerId':farmerId})
     .then(data => {
       if (!data)
@@ -70,7 +70,7 @@ exports.plotsByFarmerId = (req,res) => {
 
 
 exports.plotById = (req, res) => {
-  const id = req.params.id;
+  const id = { $regex: ".*" + req.params.id + ".*" , $options: "i" };
   Plot.findById(id)
     .then(data => {
       if (!data)
@@ -88,7 +88,7 @@ exports.plotById = (req, res) => {
 //Get PlotList By Page and FarmerId..
 exports.plotListByPage = async (req, res) => {
   try {
-    const farmerId = req.params.farmerId;
+    const farmerId = { $regex: ".*" + req.params.farmerId + ".*" , $options: "i" };
     const page = parseInt(req.query.page);
     const size = parseInt(req.query.size);
     const skip = (page - 1) * size;
@@ -107,13 +107,13 @@ exports.plotListByPage = async (req, res) => {
 
 // count the plot by farmerId.. 
 exports.plotCountByFarmerId = (req, res) => {
-  const farmerId = req.params.farmerId;
-  Plot.find({farmerId: req.params.farmerId})
+  const farmerId = { $regex: ".*" + req.params.farmerId + ".*" , $options: "i" };
+  Plot.find(farmerId)
     .then((plotList) => {
       if (!plotList) {
         res
           .status(404)
-          .send({ message: "Not found Farmer plot with id" + farmerid });
+          .send({ message: "Not found Farmer plot with id" + farmerId });
       } else if (plotList) {
         plotCount = plotList.length;
         console.log("plotCount", plotCount);
