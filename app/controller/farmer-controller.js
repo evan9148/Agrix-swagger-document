@@ -72,7 +72,7 @@ exports.addFarmer =  (req, res) => {
 
 // Get farmer by Id
 exports.farmerById = (req, res) => {
-  const id = { $regex: ".*" + req.params.id + ".*" , $options: "i" };
+  const id = req.params.id;
   Farmer.findById(id)
     .then(data => {
       if (!data)
@@ -83,6 +83,24 @@ exports.farmerById = (req, res) => {
       res
         .status(500)
         .send({ message: "Error retrieving Farmer with id=" + id });
+    });
+};
+
+
+// search api for farmer by ClusterId or firstName...
+exports.searchFarmer = (req, res) => {
+  const clusterId = { $regex: ".*" + req.query.clusterId + ".*" , $options: "i" }
+  const firstName = { $regex: ".*" + req.query.firstName + ".*" , $options: "i" }
+  Farmer.find({$or: [{clusterId},{firstName}]})
+    .then(data => {
+      if (!data)
+        res.status(404).send({ message: "Not found farmer with clusterId or firstName" });
+      else res.send(data);
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .send({ message: "Error retrieving farmer with clusterId or firstName" + err });
     });
 };
 

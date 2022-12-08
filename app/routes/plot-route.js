@@ -8,6 +8,7 @@ module.exports = app => {
     router.post("/", [authJwt.verifyToken,authJwt.isAdmin], plot.addPlot);
     router.get("/:farmerId", [authJwt.verifyToken,authJwt.isAdmin],plot.plotsByFarmerId);
     router.get("/plotById/:id",[authJwt.verifyToken,authJwt.isAdmin], plot.plotById);
+    router.get("/plotSearch/data" , [authJwt.verifyToken,authJwt.isAdmin], plot.searchPlot);
     router.get("/plotcount/:farmerId", [authJwt.verifyToken,authJwt.isAdmin],plot.plotCountByFarmerId);
     router.get("/page/:farmerId", [authJwt.verifyToken,authJwt.isAdmin],plot.plotListByPage);
     router.put("/:id", [authJwt.verifyToken,authJwt.isAdmin],plot.updatePlotById);

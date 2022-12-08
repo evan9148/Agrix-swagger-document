@@ -7,6 +7,7 @@ module.exports = app => {
     router.get("/",[authJwt.verifyToken,authJwt.isAdmin],machine.allMachine);
     router.get("/page",[authJwt.verifyToken,authJwt.isAdmin],machine.machine);
     router.get("/:id",[authJwt.verifyToken,authJwt.isAdmin],machine.machineById);
+    router.get("/machineSearch/data" , [authJwt.verifyToken,authJwt.isAdmin], machine.searchMachine);
     router.post("/", [authJwt.verifyToken,authJwt.isAdmin], machine.addMachine);
     router.put("/:id", [authJwt.verifyToken,authJwt.isAdmin],machine.updateMachineById);
     router.delete("/:id", [authJwt.verifyToken,authJwt.isAdmin],machine.deleteMachineById);

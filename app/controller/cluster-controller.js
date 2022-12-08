@@ -98,7 +98,7 @@ exports.addCluster = (req, res) => {
 }
 
 exports.clusterById = (req, res) => {
-    const id = { $regex: ".*" + req.params.id + ".*" , $options: "i" };
+    const id = req.params.id;
     Cluster.findById(id)
       .then(data => {
         if (!data)
@@ -111,6 +111,25 @@ exports.clusterById = (req, res) => {
           .send({ message: "Error retrieving Cluster with id=" + id });
       });
   };
+
+
+// search api for cluster by ClusterCode or clusterName...
+exports.searchCluster = (req, res) => {
+  const clusterCode = { $regex: ".*" + req.query.clusterCode + ".*" , $options: "i" }
+  const clusterName = { $regex: ".*" + req.query.clusterName + ".*" , $options: "i" }
+  Cluster.find({$or: [{clusterCode},{clusterName}]})
+    .then(data => {
+      if (!data)
+        res.status(404).send({ message: "Not found Cluster with clusterCode or clusterName" });
+      else res.send(data);
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .send({ message: "Error retrieving Cluster with clusterCode or clusterName" + err });
+    });
+};
+
 
 
   exports.updateClusterById = (req, res) =>{

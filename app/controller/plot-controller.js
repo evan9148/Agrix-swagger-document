@@ -54,7 +54,7 @@ exports.addPlot =  (req, res) => {
 
 
 exports.plotsByFarmerId = (req,res) => {
-  const farmerId = { $regex: ".*" + req.params.farmerId + ".*" , $options: "i" };
+  const farmerId = req.params.farmerId;
   Plot.find({'farmerId':farmerId})
     .then(data => {
       if (!data)
@@ -83,6 +83,24 @@ exports.plotById = (req, res) => {
         .send({ message: "Error retrieving Plot with id=" + id });
     });
 };
+
+
+// search api for plot by plotId...
+exports.searchPlot = (req, res) => {
+  const plotId = { $regex: ".*" + req.query.plotId + ".*" , $options: "i" }
+  Plot.find({plotId})
+    .then(data => {
+      if (!data)
+        res.status(404).send({ message: "Not found plot with plotId" });
+      else res.send(data);
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .send({ message: "Error retrieving plot with plotId" + err });
+    });
+};
+
 
 
 //Get PlotList By Page and FarmerId..
