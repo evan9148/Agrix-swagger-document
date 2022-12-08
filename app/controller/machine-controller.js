@@ -104,6 +104,24 @@ exports.machineById = (req, res) => {
     });
 };
 
+
+// search api for machine by implementCode...
+exports.searchMachine = (req, res) => {
+  const implementCode = { $regex: ".*" + req.query.implementCode + ".*" , $options: "i" }
+  Machine.find({implementCode})
+    .then(data => {
+      if (!data)
+        res.status(404).send({ message: "Not found machine with implementCode" });
+      else res.send(data);
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .send({ message: "Error retrieving machine with implementCode" + err });
+    });
+};
+
+
 // Edit/update machine Id
 exports.updateMachineById = (req, res) => {
   if (!req.body) {

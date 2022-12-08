@@ -113,6 +113,25 @@ exports.clusterById = (req, res) => {
   };
 
 
+// search api for cluster by ClusterCode or clusterName...
+exports.searchCluster = (req, res) => {
+  const clusterCode = { $regex: ".*" + req.query.clusterCode + ".*" , $options: "i" }
+  const clusterName = { $regex: ".*" + req.query.clusterName + ".*" , $options: "i" }
+  Cluster.find({$or: [{clusterCode},{clusterName}]})
+    .then(data => {
+      if (!data)
+        res.status(404).send({ message: "Not found Cluster with clusterCode or clusterName" });
+      else res.send(data);
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .send({ message: "Error retrieving Cluster with clusterCode or clusterName" + err });
+    });
+};
+
+
+
   exports.updateClusterById = (req, res) =>{
     if (!req.body) {
       return res.status(400).send({

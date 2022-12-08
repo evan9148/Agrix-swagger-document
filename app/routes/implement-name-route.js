@@ -6,8 +6,8 @@ module.exports = app => {
 
     router.get("/", [authJwt.verifyToken,authJwt.isAdmin],implementype.getImplementName);
     router.post("/", [authJwt.verifyToken,authJwt.isAdmin], implementype.addImplementName);
-    // router.put("/:id", [authJwt.verifyToken,authJwt.isAdmin],machine.updateMachineById);
-    // router.delete("/:id", [authJwt.verifyToken,authJwt.isAdmin],machine.deleteMachineById);
+    router.put("/:id", [authJwt.verifyToken,authJwt.isAdmin],implementype.updateImplementNameById);
+    router.delete("/:id", [authJwt.verifyToken,authJwt.isAdmin],implementype.deleteImplementNameById);
 
     app.use('/api/implementname', router);
 };

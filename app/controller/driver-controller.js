@@ -3,20 +3,20 @@ const Driver = db.driver;
 
 
 // Get Driver Details
-exports.allDriver = (req,res) =>{
-    const driverId = req.query.driverId;
-    Driver.find(driverId)
-      .then(data => {
-        if (!data)
-          res.status(404).send({ message: "Not found Driver with id " + driverId });
-        else res.send(data);
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .send({ message: "Error retrieving Driver with id=" + driverId });
-      });
-  }
+exports.allDriver = (req,res) => {
+  const driverId = req.query.driverId;
+  Driver.find(driverId)
+    .then(data => {
+      if (!data)
+        res.status(404).send({ message: "Not found Driver with id " + driverId });
+      else res.send(data);
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .send({ message: "Error retrieving Driver with id=" + driverId });
+    });
+}
 
 
 // get Driver by page..
@@ -74,7 +74,7 @@ exports.addDriver = (req,res) =>{
 
 // Get driver by Id
 exports.driverById = (req, res) => {
-  const id = req.params.id;
+  const id =  req.params.id;
   Driver.findById(id)
     .then(data => {
       if (!data)
@@ -83,8 +83,28 @@ exports.driverById = (req, res) => {
     })
     .catch(err => {
       res.status(500).send({
-        message: "Error retrieving Driver with id=" + id 
+        message: "Error retrieving Driver with id=" + id
       });
+    });
+};
+
+
+// search api for driver by driverId or driverName
+exports.searchDriver = (req, res) => {
+  const firstName = { $regex: ".*" + req.query.firstName + ".*" , $options: "i" }
+  const driverId = { $regex: ".*" + req.query.driverId + ".*" , $options: "i" }
+  // console.log(driverId, "drhgiu")
+  // console.log(firstName, "sshdghs")
+  Driver.find({$or : [{firstName},{driverId}]})
+    .then(data => {
+      if (!data)
+        res.status(404).send({ message: "Not found Driver with firstName or lastname"  });
+      else res.send(data);
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .send({ message: "Error retrieving Driver with firstName or lastname" , err});
     });
 };
 

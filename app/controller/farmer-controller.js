@@ -3,18 +3,18 @@ const Farmer = db.farmer;
 
 // Get All Farmer Details...
 exports.allFarmer =(req,res) =>{
-    const  farmerId= req.query.farmerId;
-      var condition = farmerId ? { farmerId: { $regex: new RegExp(farmerId), $options: "i" } } : {};
-      Farmer.find(condition)
-        .then(data => {
-          res.send(data);
-        })
-        .catch(err => {
-          res.status(500).send({
-            message:
-              err.message || "Some error occurred while retrieving FarmerId."
-          });
-        });
+  const  farmerId = req.query.farmerId;
+  var condition = farmerId ? { farmerId: { $regex: new RegExp(farmerId), $options: "i" } } : {};
+  Farmer.find(condition)
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving FarmerId."
+      });
+    });
 }
 
 
@@ -87,6 +87,24 @@ exports.farmerById = (req, res) => {
 };
 
 
+// search api for farmer by ClusterId or firstName...
+exports.searchFarmer = (req, res) => {
+  const clusterId = { $regex: ".*" + req.query.clusterId + ".*" , $options: "i" }
+  const firstName = { $regex: ".*" + req.query.firstName + ".*" , $options: "i" }
+  Farmer.find({$or: [{clusterId},{firstName}]})
+    .then(data => {
+      if (!data)
+        res.status(404).send({ message: "Not found farmer with clusterId or firstName" });
+      else res.send(data);
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .send({ message: "Error retrieving farmer with clusterId or firstName" + err });
+    });
+};
+
+
 
 // update farmer by Id..
 exports.updateFarmerById = (req, res) => {
@@ -113,7 +131,8 @@ exports.updateFarmerById = (req, res) => {
 
 //Get Api for farmers List By ClusterId
 exports.farmersByClusterId = (req, res) => {
-  Farmer.find({clusterId:req.params.clusterId})
+  const clusterid = req.params.clusterId
+  Farmer.find({clusterId: clusterid})
     .then(data => {
       if (!data)
         res.status(404).send({ message: "Not found Farmer with id " + clusterid });
