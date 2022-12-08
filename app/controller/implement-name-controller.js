@@ -53,12 +53,12 @@ exports.updateImplementNameById = (req, res) => {
     .then(data => {
       if (!data) {
         res.status(404).send({
-          message: `Cannot update ImplementName with id=${id}. Maybe ImplementName was not found!`
+          message: `Cannot update ImplementName with id=${id}. Maybe driver was not found!`
         });
-      } else res.send({ 
-        message: "ImplementName was updated successfully.",
-        driver:data
-    });
+      } else 
+        res.send({ 
+          message: "ImplementName was updated successfully.",
+        });
     })
     .catch(err => {
       res.status(500).send({
