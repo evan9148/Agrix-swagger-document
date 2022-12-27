@@ -19,7 +19,9 @@ module.exports = mongoose => {
             purchase:String, 
             expenditure:Number, 
             hrBasicDetails: String, 
-            leadDetails:String
+            leadDetails:String,
+            latitude:String,
+            longitude:String
              
         },
         { timestamps: true }

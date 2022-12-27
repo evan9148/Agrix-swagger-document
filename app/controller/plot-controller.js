@@ -35,7 +35,8 @@ exports.addPlot =  (req, res) => {
         soilType :req.body.soilType,
         nutrientContentAnalysis:req.body.nutrientContentAnalysis,
         waterSource : req.body.waterSource,
-        plotId:req.body.plotId
+        plotId:req.body.plotId,
+        clusterId:req.body.clusterId
     });
 
     plot
@@ -68,9 +69,24 @@ exports.plotsByFarmerId = (req,res) => {
     });
 }
 
+// search api for plot by clusterId...
+exports.plotByClusterId = (req, res) => {
+  const cluster = req.params.cluster
+  Plot.find({clusterId: cluster})
+    .then(data => {
+      if (!data)
+        res.status(404).send({ message: "Not found plot with clusterId" });
+      else res.send(data);
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .send({ message: "Error retrieving plot with clusterId" + err });
+    });
+};
 
 exports.plotById = (req, res) => {
-  const id = { $regex: ".*" + req.params.id + ".*" , $options: "i" };
+  const id =req.params.id;
   Plot.findById(id)
     .then(data => {
       if (!data)
@@ -88,6 +104,10 @@ exports.plotById = (req, res) => {
 // search api for plot by plotId...
 exports.searchPlot = (req, res) => {
   const plotId = { $regex: ".*" + req.query.plotId + ".*" , $options: "i" }
+  const Object={}
+  if(plotName){
+    const plot =Object.plotName
+  } 
   Plot.find({plotId})
     .then(data => {
       if (!data)
@@ -106,7 +126,7 @@ exports.searchPlot = (req, res) => {
 //Get PlotList By Page and FarmerId..
 exports.plotListByPage = async (req, res) => {
   try {
-    const farmerId = { $regex: ".*" + req.params.farmerId + ".*" , $options: "i" };
+    const farmerId =req.params.farmerId;
     const page = parseInt(req.query.page);
     const size = parseInt(req.query.size);
     const skip = (page - 1) * size;
@@ -125,8 +145,8 @@ exports.plotListByPage = async (req, res) => {
 
 // count the plot by farmerId.. 
 exports.plotCountByFarmerId = (req, res) => {
-  const farmerId = { $regex: ".*" + req.params.farmerId + ".*" , $options: "i" };
-  Plot.find(farmerId)
+  const farmerId =req.params.farmerId;
+  Plot.find({'farmerId':farmerId})
     .then((plotList) => {
       if (!plotList) {
         res

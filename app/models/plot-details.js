@@ -16,7 +16,8 @@ module.exports = mongoose => {
           soilType : String,
           nutrientContentAnalysis: String,
           waterSource : String,
-          plotId:String
+          plotId:String,
+          clusterId:String
       },
       { timestamps: true }
     )

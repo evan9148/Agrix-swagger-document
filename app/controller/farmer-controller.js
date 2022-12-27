@@ -50,6 +50,7 @@ exports.addFarmer =  (req, res) => {
         clusterCode:req.body.clusterCode,
         ownerType: req.body.ownerType,
         address: req.body.address,
+        contact: req.body.contact,
         clusterId:req.body.clusterId,
         farmingSeason: req.body.farmingSeason,
         cropType: req.body.cropType,

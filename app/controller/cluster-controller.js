@@ -77,7 +77,9 @@ exports.addCluster = (req, res) => {
         purchase: req.body.purchase,
         expenditure:req.body.expenditure,
         hrBasicDetails:req.body.hrBasicDetails,
-        leadDetails:req.body.leadDetails
+        leadDetails:req.body.leadDetails,
+        latitude:req.body.latitude,
+        longitude:req.body.longitude
   
     });
     console.log(cluster);
