@@ -36,7 +36,11 @@ exports.addPlot =  (req, res) => {
         nutrientContentAnalysis:req.body.nutrientContentAnalysis,
         waterSource : req.body.waterSource,
         plotId:req.body.plotId,
-        clusterId:req.body.clusterId
+        clusterId:req.body.clusterId,
+        cropType: req.body.cropType,
+        cultivationDate: req.body.cultivationDate,
+        harvestingDate: req.body.harvestingDate,
+        seedAmount: req.body.seedAmount
     });
 
     plot
@@ -130,7 +134,7 @@ exports.plotListByPage = async (req, res) => {
     const page = parseInt(req.query.page);
     const size = parseInt(req.query.size);
     const skip = (page - 1) * size;
-    const plot = await Plot.find({'farmerId':farmerId}).skip(skip).limit(size);
+    const plot = await Plot.find({'farmerId':farmerId}).sort([['createdAt','desc']]).skip(skip).limit(size);
     res.json({
       plot,
       page,
