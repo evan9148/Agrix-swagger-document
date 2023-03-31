@@ -14,5 +14,6 @@ module.exports = app => {
     router.put("/:id", [authJwt.verifyToken,authJwt.isAdmin],plot.updatePlotById);
     router.delete("/:id", [authJwt.verifyToken,authJwt.isAdmin],plot.deletePlotById);
     router.get("/clusterId/:cluster", [authJwt.verifyToken,authJwt.isAdmin],plot.plotByClusterId );
+    
     app.use('/api/plot', router);
   };

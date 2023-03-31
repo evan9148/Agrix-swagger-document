@@ -38,6 +38,8 @@ exports.addPlot =  (req, res) => {
         plotId:req.body.plotId,
         clusterId:req.body.clusterId,
         cropType: req.body.cropType,
+        variety: req.body.variety,
+        yield: req.body.yield,
         cultivationDate: req.body.cultivationDate,
         harvestingDate: req.body.harvestingDate,
         seedAmount: req.body.seedAmount
@@ -89,8 +91,9 @@ exports.plotByClusterId = (req, res) => {
     });
 };
 
+
 exports.plotById = (req, res) => {
-  const id =req.params.id;
+  const id = req.params.id;
   Plot.findById(id)
     .then(data => {
       if (!data)
@@ -108,10 +111,6 @@ exports.plotById = (req, res) => {
 // search api for plot by plotId...
 exports.searchPlot = (req, res) => {
   const plotId = { $regex: ".*" + req.query.plotId + ".*" , $options: "i" }
-  const Object={}
-  if(plotName){
-    const plot =Object.plotName
-  } 
   Plot.find({plotId})
     .then(data => {
       if (!data)

@@ -12,7 +12,7 @@ module.exports = mongoose =>{
                       type: mongoose.Schema.Types.ObjectId,
                       ref: "Role"
                     }
-                  ]
+                ]
             },
             {timestamps:true}
         )

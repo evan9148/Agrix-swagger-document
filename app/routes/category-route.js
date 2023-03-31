@@ -11,3 +11,4 @@ module.exports = app => {
 
     app.use('/api/category', router);
 };
+

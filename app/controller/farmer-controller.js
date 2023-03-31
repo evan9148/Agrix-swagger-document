@@ -46,6 +46,7 @@ exports.addFarmer =  (req, res) => {
     const farmer = new Farmer({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
+        
         farmerId: req.body.farmerId,
         clusterCode:req.body.clusterCode,
         ownerType: req.body.ownerType,
